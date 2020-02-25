@@ -5,6 +5,7 @@ import sys
 ADDRESS = "0.0.0.0"
 PORT = 31337
 CHUNK = 2048
+chunks_send = 0
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:
     server_socket.bind((ADDRESS, PORT))
@@ -21,9 +22,11 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:
                 if not data:
                     print(f'No more data available, close connection')
                     break
+                chunks_send += 1
                 connection.send(data)
             except BrokenPipeError as e:
                 print(f'Connection closed from the other end')
                 break
     print(f'Connection closed')
 print(f'Socket closed')
+print(f'Send {chunks_send * CHUNK} bytes')
