@@ -1,2 +1,2 @@
 # stdin2sock
-Send stdin data stream to socket
+Send stdin data stream to socket. Experimentation.
